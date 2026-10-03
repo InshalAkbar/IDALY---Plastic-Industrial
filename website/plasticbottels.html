@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idaly - Industrial Manufacturer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #fff;
+            color: #333;
+            text-align: center;
+        }
+
+        .header-section {
+            margin-bottom: 50px;
+        }
+
+        .sub-title {
+            color: #d9232d;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .main-title {
+            font-size: 36px;
+            margin: 10px 0;
+            font-weight: 800;
+        }
+
+        .description {
+            max-width: 600px;
+            margin: 0 auto;
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            text-align: left;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .image-container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        /* Diagonal White Cut Effect */
+        .image-container::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 100px 100px;
+            border-color: transparent transparent #ffffff transparent;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
+            min-height: 54px; /* text alignment fix */
+        }
+
+        .price-tag {
+            font-size: 16px;
+            font-weight: bold;
+            color: #d9232d;
+            margin-bottom: 10px;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #aaa;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        /* Add to Cart Button Style */
+        .add-btn {
+            background-color: #d9232d;
+            color: white;
+            padding: 8px 15px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #111;
+        }
+
+        /* Floating Button (Back to Top) */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #d9232d;
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        @keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+.animate-zoomIn {
+    animation: zoomIn 0.3s ease-out forwards;
+}
+.custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #d9232d;
+    border-radius: 10px;
+}
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .slant-header {
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+        }
+        .slant-image {
+            clip-path: polygon(15% 0, 100% 0, 85% 100%, 0% 100%);
+        }
+    </style>
+</head>
+<body class="bg-white font-sans overflow-x-hidden">
+
+    <header class="sticky top-0 z-[100] bg-black text-white flex items-center justify-between h-20 shadow-xl">
+        <div class="bg-red-600 h-full px-10 slant-header flex items-center gap-2">
+            <div class="bg-white text-red-600 rounded-full p-2 h-10 w-10 flex items-center justify-center">
+                <i class="fas fa-cog fa-spin text-xl"></i>
+            </div>
+            <span class="text-3xl font-bold tracking-tighter">IDALY</span>
+        </div>
+
+        <nav class="hidden lg:flex gap-8 font-bold uppercase text-xs tracking-widest">
+            <a href="../index.html" class="text-red-500">Home </a>
+            <a href="./aboutus.html" class="hover:text-red-500 transition">About Us</a>
+            <a href="./contactus.html" class="hover:text-red-500 transition">Services </a>
+          <div class="relative group inline-block">
+    <a href="./Accessories.html" class="hover:text-red-500 transition flex items-center gap-1">
+        Categories <i class="fas fa-chevron-down text-[8px]"></i>
+    </a>
+
+     <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-100 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+        <ul class="py-2 text-sm text-gray-700">
+            <li><a href="./plasticbottels.html" class="block px-4 py-2 hover:bg-red-50 hover:text-red-500 transition">Plastic Bottles</a></li>
+            <li><a href="./plasticbuckets.html" class="block px-4 py-2 hover:bg-red-50 hover:text-red-500 transition">Plastic Buckets</a></li>
+            <li><a href="./plasticpots.html" class="block px-4 py-2 hover:bg-red-50 hover:text-red-500 transition">Plastic Pots</a></li>
+            <li><a href="./PlasticJerrycans.html" class="block px-4 py-2 hover:bg-red-50 hover:text-red-500 transition">Plastic Jerrycans</a></li>
+            <li><a href="./Accessories.html" class="block px-4 py-2 hover:bg-red-50 hover:text-red-500 transition">Accessories</a></li>
+            <li><a href="./SustainablePacking.html" class="block px-4 py-2 hover:bg-red-50 hover:text-red-500 transition">Sustainable Packing</a></li>
+        </ul>
+    </div>
+</div>
+            <a href="./contactus.html" class="hover:text-red-500 transition">Contact</a>
+        </nav>
+
+        <div class="flex items-center h-full">
+            <div class="flex gap-5 mr-8 items-center">
+                <i class="fas fa-search cursor-pointer hover:text-red-600"></i>
+                <div class="relative cursor-pointer group" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart group-hover:text-red-500 transition-colors"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-600 text-[10px] font-bold rounded-full px-1.5 border-2 border-black">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="header-section">
+        <span class="sub-title">— OUR PRODUCTS —</span>
+        <h1 class="main-title">Visit Our Shops To Buy</h1>
+        <p class="description">
+            Choose from our premium range of industrial plastic solutions. Quality guaranteed for every purchase.
+        </p>
+    </div>
+
+    <div class="product-grid">
+        <div class="product-card">
+            <div class="image-container">
+                <img src="../images/pb-1.png" alt="Product">
+            </div>
+            <div class="product-name">plastic bottle 50 ml pet transparent boston-round</div>
+            <div class="price-tag"><span class="old-price">$50.00</span> $25.00</div>
+            <button class="add-btn" onclick="addToCart('50 ml PET Transparent', 25.00)">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container">
+                <img src="../images/pb-2.jpg" alt="Product">
+            </div>
+            <div class="product-name">plastic bottle 30 ml r-pet 50% transparent</div>
+            <div class="price-tag">$50.00</div>
+            <button class="add-btn" onclick="addToCart('50 ml PET Transparent', 25.00)">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container"><img src="../images/pb-3.jpg" alt="Product"></div>
+            <div class="product-name">plastic bottle 30 ml r-pet transparent tall-boston</div>
+            <div class="price-tag"><span class="old-price">$90.00</span> $51.00</div>
+            <button class="add-btn" onclick="addToCart('50 ml PET Transparent', 25.00)">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <div class="image-container"><img src="../images/pb-4.png" alt="Product"></div>
+            <div class="product-name">plastic bottle 50 ml r-pet transparent boston-round</div>
+            <div class="price-tag">$72.00</div>
+            <button class="add-btn" onclick="addToCart('50 ml PET Transparent', 25.00)">Add to Cart</button>
+        </div>
+        
+        <div class="product-card">
+            <div class="image-container"><img src="../images/pb-6.jpg" alt="Product"></div>
+            <div class="product-name">plastic bottle 100 ml hdpe natural h28mm</div>
+            <div class="price-tag">$72.00</div>
+       
+            <button class="add-btn" onclick="addToCart('50 ml PET Transparent', 25.00)">Add to Cart</button>
+
+
+        </div>
+        <div class="product-card">
+            <div class="image-container"><img src="../images/pb-7.png" alt="Product"></div>
+            <div class="product-name">plastic bottle 100 ml hdpe natural h28mm</div>
+            <div class="price-tag">$72.00</div>
+       
+            <button class="add-btn" onclick="addToCart('50 ml PET Transparent', 25.00)">Add to Cart</button>
+
+
+        </div>
+        <div class="product-card">
+            <div class="image-container"><img src="../images/pb-8.png" alt="Product"></div>
+            <div class="product-name">plastic bottle 100 ml hdpe natural h28mm</div>
+            <div class="price-tag">$72.00</div>
+       
+            <button class="add-btn" onclick="addToCart('50 ml PET Transparent', 25.00)">Add to Cart</button>
+
+
+        </div>
+        <div class="product-card">
+            <div class="image-container"><img src="../images/pb-9.png" alt="Product"></div>
+            <div class="product-name">plastic bottle 100 ml hdpe natural h28mm</div>
+            <div class="price-tag">$72.00</div>
+       
+            <button class="add-btn" onclick="addToCart('50 ml PET Transparent', 25.00)">Add to Cart</button>
+
+
+        </div>
+        <div class="product-card">
+            <div class="image-container"><img src="../images/pb-10.jpg" alt="Product"></div>
+            <div class="product-name">plastic bottle 100 ml hdpe natural h28mm</div>
+            <div class="price-tag">$72.00</div>
+       
+            <button class="add-btn" onclick="addToCart('50 ml PET Transparent', 25.00)">Add to Cart</button>
+
+
+        </div>
+        <div class="product-card">
+            <div class="image-container"><img src="../images/pb-11.jpg" alt="Product"></div>
+            <div class="product-name">plastic bottle 100 ml hdpe natural h28mm</div>
+            <div class="price-tag">$72.00</div>
+       
+            <button class="add-btn" onclick="addToCart('50 ml PET Transparent', 25.00)">Add to Cart</button>
+
+
+        </div>
+        <div class="product-card">
+            <div class="image-container"><img src="../images/pb-12.jpg" alt="Product"></div>
+            <div class="product-name">plastic bottle 100 ml hdpe natural h28mm</div>
+            <div class="price-tag">$72.00</div>
+       
+            <button class="add-btn" onclick="addToCart('50 ml PET Transparent', 25.00)">Add to Cart</button>
+
+
+        </div>
+        </div>
+
+    <a href="#" class="scroll-top">▲</a>
+
+    <div id="side-cart" class="fixed top-0 right-[-400px] w-full max-w-[380px] h-full bg-white shadow-2xl z-[1001] transition-all duration-500 ease-in-out border-l-4 border-red-600">
+        <div class="bg-black text-white p-6 flex justify-between items-center slant-header">
+            <h2 class="text-xl font-bold uppercase tracking-widest"><i class="fas fa-shopping-basket mr-2"></i> Your Cart</h2>
+            <button onclick="toggleCart()" class="text-white hover:text-red-500 transition-all text-2xl">&times;</button>
+        </div>
+        
+        <div id="cart-items-container" class="p-6 overflow-y-auto h-[calc(100%-200px)] custom-scrollbar">
+            <p class="text-gray-400 text-center mt-20 italic">Aapka cart khali hai...</p>
+        </div>
+    
+        <div class="absolute bottom-0 w-full p-6 bg-gray-50 border-t border-gray-200">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-gray-600 font-bold uppercase text-sm tracking-tighter">Total Amount:</span>
+                <span class="text-2xl font-black text-red-600">$<span id="cart-total-price">0.00</span></span>
+            </div>
+            <button onclick="openCheckout()" class="w-full bg-red-600 text-white py-4 font-bold uppercase tracking-widest hover:bg-black transition-all shadow-lg active:scale-95">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+    
+    <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1000] hidden opacity-0 transition-opacity duration-300" onclick="toggleCart()"></div>
+
+
+    <div id="checkout-modal" class="fixed inset-0 z-[2000] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeCheckout()"></div>
+        
+        <div class="relative bg-white w-full max-w-lg rounded-xl overflow-hidden shadow-2xl animate-zoomIn">
+            <div class="bg-red-600 p-6 text-white flex justify-between items-center">
+                <h2 class="text-2xl font-black uppercase tracking-tighter">Order Checkout</h2>
+                <button onclick="closeCheckout()" class="text-3xl">&times;</button>
+            </div>
+            
+            <form id="order-form" class="p-8 text-left" onsubmit="handleOrder(event)">
+                <div class="grid grid-cols-1 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Full Name</label>
+                        <input type="text" required class="w-full border-2 border-gray-100 p-3 rounded-lg focus:border-red-500 outline-none transition" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Shipping Address</label>
+                        <textarea required class="w-full border-2 border-gray-100 p-3 rounded-lg focus:border-red-500 outline-none transition" placeholder="Complete Address..."></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Phone Number</label>
+                            <input type="tel" required class="w-full border-2 border-gray-100 p-3 rounded-lg focus:border-red-500 outline-none transition" placeholder="0300-1234567">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Payment Method</label>
+                            <select class="w-full border-2 border-gray-100 p-3 rounded-lg bg-white outline-none">
+                                <option>Cash on Delivery</option>
+                                <option disabled>Card (Coming Soon)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="mt-8 border-t pt-6">
+                    <div class="flex justify-between text-xl font-black mb-6">
+                        <span>Final Total:</span>
+                        <span class="text-red-600">$<span id="final-total">0.00</span></span>
+                    </div>
+                    <button type="submit" class="w-full bg-black text-white py-4 font-bold uppercase tracking-widest hover:bg-red-600 transition-all rounded-lg">
+                        Confirm My Order
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="bg-[#111111] text-white pt-24 pb-10 px-6 md:px-20 relative overflow-hidden mt-20">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div class="space-y-6">
+                    <div class="flex items-center gap-2 group cursor-pointer">
+                        <div class="bg-red-600 p-2 rounded-lg group-hover:rotate-[360deg] transition-transform duration-700">
+                            <i class="fas fa-cog text-white text-2xl"></i>
+                        </div>
+                        <span class="text-3xl font-black tracking-tighter uppercase">Idaly</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed text-sm">Leading the way in industrial excellence.</p>
+                </div>
+                </div>
+            <div class="border-t border-zinc-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-xs uppercase tracking-widest">© 2026 Idaly. Made with passion.</p>
+            </div>
+        </div>
+        <div id="checkout-modal" class="fixed inset-0 z-[2000] hidden items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeCheckout()"></div>
+    
+    <div class="relative bg-white w-full max-w-lg rounded-xl overflow-hidden shadow-2xl animate-zoomIn">
+        <div class="bg-red-600 p-6 text-white flex justify-between items-center">
+            <h2 class="text-2xl font-black uppercase tracking-tighter">Order Checkout</h2>
+            <button onclick="closeCheckout()" class="text-3xl">&times;</button>
+        </div>
+        
+        <form id="order-form" class="p-8 text-left" onsubmit="handleOrder(event)">
+            <div class="grid grid-cols-1 gap-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Full Name</label>
+                    <input type="text" required class="w-full border-2 border-gray-100 p-3 rounded-lg focus:border-red-500 outline-none transition" placeholder="John Doe">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Shipping Address</label>
+                    <textarea required class="w-full border-2 border-gray-100 p-3 rounded-lg focus:border-red-500 outline-none transition" placeholder="Complete Address..."></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Phone Number</label>
+                        <input type="tel" required class="w-full border-2 border-gray-100 p-3 rounded-lg focus:border-red-500 outline-none transition" placeholder="0300-1234567">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-gray-500 mb-1">Payment Method</label>
+                        <select class="w-full border-2 border-gray-100 p-3 rounded-lg bg-white outline-none">
+                            <option>Cash on Delivery</option>
+                            <option disabled>Card (Coming Soon)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 border-t pt-6">
+                <div class="flex justify-between text-xl font-black mb-6">
+                    <span>Final Total:</span>
+                    <span class="text-red-600">$<span id="final-total">0.00</span></span>
+                </div>
+                <button type="submit" class="w-full bg-black text-white py-4 font-bold uppercase tracking-widest hover:bg-red-600 transition-all rounded-lg">
+                    Confirm My Order
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+    </footer>
+
+    <script>
+        let count = 0;
+        function addToCart() {
+            count++;
+            document.getElementById('cart-count').innerText = count;
+            alert('Item added to cart!');
+        }
+    </script>
+    <script>
+        let cart = [];
+
+function toggleCart() {
+    const sidebar = document.getElementById('side-cart');
+    const overlay = document.getElementById('cart-overlay');
+    
+    if (sidebar.style.right === "0px") {
+        sidebar.style.right = "-400px";
+        overlay.classList.add('hidden');
+        overlay.style.opacity = "0";
+    } else {
+        sidebar.style.right = "0px";
+        overlay.classList.remove('hidden');
+        setTimeout(() => overlay.style.opacity = "1", 10);
+    }
+}
+
+function addToCart(name, price) {
+    const existingItem = cart.find(item => item.name === name);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ name: name, price: price, quantity: 1 });
+    }
+    
+    updateCartUI();
+    // Item add hone par ek chota alert ya sidebar kholna:
+    // toggleCart(); 
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+}
+
+function updateCartUI() {
+    const container = document.getElementById('cart-items-container');
+    const countLabel = document.getElementById('cart-count');
+    const totalLabel = document.getElementById('cart-total-price');
+    
+    let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    countLabel.innerText = totalItems;
+
+    if (cart.length === 0) {
+        container.innerHTML = '<p class="text-gray-400 text-center mt-20 italic">Aapka cart khali hai...</p>';
+        totalLabel.innerText = "0.00";
+    } else {
+        let html = '';
+        let grandTotal = 0;
+        
+        cart.forEach((item, index) => {
+            let subtotal = item.price * item.quantity;
+            grandTotal += subtotal;
+            html += `
+                <div class="flex justify-between items-center mb-6 animate-fadeIn bg-white p-3 rounded-lg shadow-sm border-l-4 border-red-500">
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold uppercase text-gray-800 leading-tight">${item.name}</h4>
+                        <p class="text-red-600 font-bold text-xs mt-1">$${item.price.toFixed(2)} x ${item.quantity}</p>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="ml-4 text-gray-300 hover:text-red-600 transition-colors">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+        totalLabel.innerText = grandTotal.toFixed(2);
+    }
+}
+    </script>
+    <script>
+        function openCheckout() {
+    if (cart.length === 0) {
+        alert("Aapka cart khali hai!");
+        return;
+    }
+    // Cart sidebar band karein
+    toggleCart();
+    
+    // Total price modal mein dikhayein
+    const grandTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    document.getElementById('final-total').innerText = grandTotal.toFixed(2);
+    
+    // Modal show karein
+    document.getElementById('checkout-modal').classList.remove('hidden');
+    document.getElementById('checkout-modal').classList.add('flex');
+}
+
+function closeCheckout() {
+    document.getElementById('checkout-modal').classList.add('hidden');
+    document.getElementById('checkout-modal').classList.remove('flex');
+}
+
+function handleOrder(event) {
+    event.preventDefault(); // Page reload hone se rokein
+    
+    // Yahan hum real project mein backend par data bhejte hain
+    alert("Shukriya! Aapka Order receive ho gaya hai. Hum jald aap se rabta karenge.");
+    
+    // Cart khali karein aur band karein
+    cart = [];
+    updateCartUI();
+    closeCheckout();
+}
+    </script>
+</body>
+</html>
